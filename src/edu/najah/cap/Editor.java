@@ -1,10 +1,8 @@
 package edu.najah.cap;
 
-import edu.najah.cap.ex.EditorException;
 import edu.najah.cap.ex.EditorSaveAsException;
 import edu.najah.cap.ex.EditorSaveException;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -15,8 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JEditorPane;
 import javax.swing.JFileChooser;
@@ -37,7 +33,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		new Editor();
 	}
 
-	public JEditorPane TP;//Text Panel
+	public JEditorPane jEditorPane;//Text Panel
 	public JMenuBar menu;//Menu
 	public JMenuItem copy, paste, cut, move;
 	public boolean changed = false;
@@ -50,10 +46,10 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 	public Editor() {
 		//Editor the name of our application
 		super("Editor");
-		TP = new JEditorPane();
+		jEditorPane = new JEditorPane();
 		// center means middle of container.
-		add(new JScrollPane(TP), "Center");
-		TP.getDocument().addDocumentListener(this);
+		add(new JScrollPane(jEditorPane), "Center");
+		jEditorPane.getDocument().addDocumentListener(this);
 
 		menu = new JMenuBar();
 		setJMenuBar(menu);
@@ -162,7 +158,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 				if (file == null) {
 					saveAs(actions[1]);
 				} else {
-					String text = TP.getText();
+					String text = jEditorPane.getText();
 					System.out.println(text);
 					try (PrintWriter writer = new PrintWriter(file);){
 						if (!file.canWrite())
@@ -192,7 +188,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 					saveAs(actions[1]);
 					return;
 				}
-				String text = TP.getText();
+				String text = jEditorPane.getText();
 				System.out.println(text);
 				try (PrintWriter writer = new PrintWriter(file);){
 					if (!file.canWrite())
@@ -204,19 +200,19 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 				}
 			}
 			file = null;
-			TP.setText("");
+			jEditorPane.setText("");
 			changed = false;
 			setTitle("Editor");
 		} else if (action.equals(actions[5])) {
 			saveAs(actions[5]);
 		} else if (action.equals("Select All")) {
-			TP.selectAll();
+			jEditorPane.selectAll();
 		} else if (action.equals("Copy")) {
-			TP.copy();
+			jEditorPane.copy();
 		} else if (action.equals("Cut")) {
-			TP.cut();
+			jEditorPane.cut();
 		} else if (action.equals("Paste")) {
-			TP.paste();
+			jEditorPane.paste();
 		} else if (action.equals("Find")) {
 			FindDialog find = new FindDialog(this, true);
 			find.showDialog();
@@ -248,7 +244,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 						saveAs(actions[1]);
 						return;
 					}
-					String text = TP.getText();
+					String text = jEditorPane.getText();
 					System.out.println(text);
 					try {
 						PrintWriter writer = new PrintWriter(file);
@@ -274,7 +270,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 					JOptionPane.showMessageDialog(null, "Cannot read file !", "Error !", 0);//0 means show Error Dialog
 				}
 				
-				TP.setText(rs.toString());
+				jEditorPane.setText(rs.toString());
 				changed = false;
 				setTitle("Editor - " + file.getName());
 			}
@@ -295,7 +291,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 			return;
 		file = dialog.getSelectedFile();
 		PrintWriter writer = getWriter(file);
-		writer.write(TP.getText());
+		writer.write(jEditorPane.getText());
 		changed = false;
 		setTitle("Editor - " + file.getName());
 	}
@@ -316,7 +312,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 			return;
 		file = dialog.getSelectedFile();
 		try (PrintWriter writer = new PrintWriter(file);){
-			writer.write(TP.getText());
+			writer.write(jEditorPane.getText());
 			changed = false;
 			setTitle("Save as Text Editor - " + file.getName());
 		} catch (FileNotFoundException e) {
