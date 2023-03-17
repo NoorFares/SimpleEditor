@@ -18,7 +18,8 @@ by providing more flexibility, maintainability, performance, and debugging capab
  # class variable  field should  not have public accsess (Minor):
  Avoiding public access to class variables or fields can have a positive impact on software quality by promoting encapsulation, modularity, and security.
 
-# private methods that are never executed are dead code (Major): unnecessary, inoperative code that should be removed. Cleaning out dead code decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from being introduced.
+# private methods that are never executed are dead code (Major): 
+unnecessary, inoperative code that should be removed. Cleaning out dead code decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from being introduced.
 Note that this rule does not take reflection into account, which means that issues will be raised on private methods that are only accessed using the reflection API.
 
 # Filed names should comply with name convention (Minor):
