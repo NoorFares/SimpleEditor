@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
+      <module fileurl="file://$PROJECT_DIR$/QA.iml" filepath="$PROJECT_DIR$/QA.iml" />
+=======
       <module fileurl="file://$PROJECT_DIR$/SimpleEditor.iml" filepath="$PROJECT_DIR$/SimpleEditor.iml" />
+>>>>>>> origin/main
     </modules>
   </component>
 </project>
