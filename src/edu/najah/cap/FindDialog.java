@@ -19,22 +19,23 @@ import javax.swing.JTextField;
 @SuppressWarnings("serial")
 public class FindDialog extends JDialog implements ActionListener, KeyListener {
 
-	Editor parent;
+	Editor editParent;
 	JLabel label;
 	JTextField textField;
 	JCheckBox caseSensitive;
-	JButton find, close;
+	JButton find;
+	JButton close;
 	boolean finishedFinding = true;
-	Matcher matcher;
+	private transient Matcher matcher;
 
-	public FindDialog(Editor parent, boolean modal) {
-		super(parent, modal);
-		this.parent = parent;
+	public FindDialog(Editor editParent, boolean modal) {
+		super(editParent, modal);
+		this.editParent = editParent;
 		getContentPane().addKeyListener(this);
 		getContentPane().setFocusable(true);
 		initComponents();
 		setTitle("Find");
-		setLocationRelativeTo(parent);
+		setLocationRelativeTo(editParent);
 		pack();
 	}
 
@@ -75,16 +76,15 @@ public class FindDialog extends JDialog implements ActionListener, KeyListener {
 			if (matcher.find()) {
 				int selectionStart = matcher.start();
 				int selectionEnd = matcher.end();
-				parent.TP.moveCaretPosition(matcher.start());
-				parent.TP.select(selectionStart, selectionEnd);
+				editParent.getjEditorPane().moveCaretPosition(matcher.start());
+				editParent.getjEditorPane().select(selectionStart, selectionEnd);
 			} else {
 				finishedFinding = true;
 				JOptionPane.showMessageDialog(this, "You have reached the end of the file", "End of file",
 						JOptionPane.INFORMATION_MESSAGE);
-				// closeDialog();
 			}
 		} else {
-			matcher = Pattern.compile(pattern).matcher(parent.TP.getText());
+			matcher = Pattern.compile(pattern).matcher(editParent.getjEditorPane().getText());
 			finishedFinding = false;
 			find(pattern);
 		}
@@ -113,11 +113,11 @@ public class FindDialog extends JDialog implements ActionListener, KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// System.out.println(e.getKeyCode());
 		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 			closeDialog();
 		}
@@ -125,6 +125,7 @@ public class FindDialog extends JDialog implements ActionListener, KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		throw new UnsupportedOperationException();
 	}
 
 }
