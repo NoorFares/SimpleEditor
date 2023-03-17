@@ -323,13 +323,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 			e.printStackTrace();
 		}
 	}
-	private static PrintWriter getWriter(File file) {
-		try {
-			return new PrintWriter(file);
-		} catch (Exception e){
-			return null;
-		}
-	}
+
 	@Override
 	public void insertUpdate(DocumentEvent e) {
 		changed = true;
