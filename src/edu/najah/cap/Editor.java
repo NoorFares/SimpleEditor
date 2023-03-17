@@ -28,7 +28,9 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 	private static final String SAVE_FILE ="Save file";
 	private static final String CANNOT_WRITE_FILE ="Cannot write file!";
 	private JEditorPane jEditorPane;
-	public JMenuBar menu;
+	private JMenuBar menu;
+
+
 
 	public JMenuItem getCopy() {
 		return copy;
@@ -68,7 +70,16 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		this.jEditorPane = jEditorPane;
 	}
 
-	public boolean changed = false;
+	public boolean isChanged() {
+		return changed;
+	}
+
+	public void setChanged(boolean changed) {
+		this.changed = changed;
+	}
+
+	private  boolean changed = false;
+
 	protected File file;
 	
 	private String[] actions = {"Open","Save","New","Edit","Quit", "Save as..."};
@@ -81,13 +92,13 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		jEditorPane.getDocument().addDocumentListener(this);
 		menu = new JMenuBar();
 		setJMenuBar(menu);
-		BuildMenu();
+		buildMenu();
 		setSize(500, 500);
 		setVisible(true);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 
-	private void BuildMenu() {
+	private void buildMenu() {
 		buildFileMenu();
 		buildEditMenu();
 	}
@@ -326,17 +337,17 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 
 	@Override
 	public void insertUpdate(DocumentEvent e) {
-		changed = true;
+		setChanged(true);
 	}
 
 	@Override
 	public void removeUpdate(DocumentEvent e) {
-		changed = true;
+		setChanged(true);
 	}
 
 	@Override
 	public void changedUpdate(DocumentEvent e) {
-		changed = true;
+		setChanged(true);
 	}
 
 }
