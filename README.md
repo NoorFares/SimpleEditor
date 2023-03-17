@@ -8,3 +8,19 @@ Duplicating string literals in software can negatively affect software quality b
 
 # Sections of code should not be commented out
 Commented-out code sections can negatively affect software quality by cluttering the code, becoming outdated, and introducing the risk of errors. Therefore, it is better to avoid using commented-out code and instead use version control systems to keep track of code changes and maintain a clean codebase.
+
+# Null pointer exceptions (NPEs)
+can negatively impact software quality by causing the software to crash, produce incorrect or incomplete results, be difficult to debug, and harder to maintain. Defensive programming techniques, such as null checks and exception handling, can prevent NPEs and improve software quality, along with testing and code review processes to identify and address NPEs.
+
+#Using a logger instead of System.out.println() can improve software quality 
+by providing more flexibility, maintainability, performance, and debugging capabilities.
+ 
+ # class variable  field should  not have public accsess
+ Avoiding public access to class variables or fields can have a positive impact on software quality by promoting encapsulation, modularity, and security.
+
+
+
+
+
+
+
